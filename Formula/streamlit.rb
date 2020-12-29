@@ -12,6 +12,8 @@ class Streamlit < Formula
   depends_on "python@3.9"
 
   def install
+    version = Language::Python.major_minor_version Formula["python@3.9"].opt_bin/"python3"
+    ENV.prepend_create_path "PYTHONPATH", lib/"python#{version}/site-packages"
     system Formula["python@3.9"].opt_bin/"python3", *Language::Python.setup_install_args(prefix)
   end
 
